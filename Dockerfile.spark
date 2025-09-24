@@ -1,4 +1,4 @@
-FROM bitnami/spark:4.0.0
+FROM bitnami/spark:latest
 
 USER root
 
@@ -9,8 +9,33 @@ RUN apt-get update && apt-get install -y \
     openjdk-17-jdk-headless \
     procps \
     curl \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Define JAVA_HOME para Spark
+# Configura JAVA_HOME
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Crear usuario spark y HOME si no existe
+RUN useradd -m spark || true
+ENV HOME=/home/spark
+
+# Crear directorio para JARs y darle permisos
+RUN mkdir -p /opt/bitnami/spark/jars && chown -R spark:spark /opt/bitnami/spark/jars
+
+USER spark
+
+# Copiar requirements.txt si necesitas instalar paquetes Python en Spark
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+USER root
+
+# Descargar JARs necesarios para Hadoop, AWS SDK y Guava
+RUN wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar -P /opt/bitnami/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.11.1000/aws-java-sdk-1.11.1000.jar -P /opt/bitnami/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/com/google/guava/guava/30.1.1-jre/guava-30.1.1-jre.jar -P /opt/bitnami/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/3.2.0/hadoop-common-3.2.0.jar -P /opt/bitnami/spark/jars/
+
+# Devolver al usuario spark
+USER spark
