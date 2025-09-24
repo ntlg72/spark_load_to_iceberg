@@ -1,8 +1,9 @@
 # Configuración común para Spark
 x-spark-common: &spark-common
-  build:
-    context: .
-    dockerfile: Dockerfile.spark
+  image: bitnami/spark:latest
+  user: root
+  tmpfs:
+    - /opt/bitnami/spark/tmp
   volumes:
     - ./jobs:/opt/bitnami/spark/jobs
   networks:
