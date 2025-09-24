@@ -1,0 +1,4 @@
+docker-compose build --no-cache
+docker-compose up -d
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 
+Oajimenez1!

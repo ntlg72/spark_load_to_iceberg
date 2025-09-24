@@ -1,0 +1,29 @@
+# Usa una única versión base (elige 2.9.3 o 2.9.0, recomiendo la más reciente)
+FROM apache/airflow:2.9.3
+
+USER root
+
+# Instala dependencias del sistema (Java 17 + compiladores)
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    openjdk-17-jdk-headless \
+    procps \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar JAVA_HOME para Java 17
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+USER airflow
+
+# Instala librerías de Python necesarias
+RUN pip install --no-cache-dir \
+    apache-airflow-providers-apache-spark==4.11.0 \
+    apache-airflow-providers-openlineage>=1.8.0 \
+    pyspark==4.0.0 \
+    pandas \
+    boto3 \
+    requests \
+    urllib3 \
+    sodapy
