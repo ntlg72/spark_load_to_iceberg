@@ -11,3 +11,12 @@ logs/
 
 # Docker
 *.env
+
+# MinIO y datos generados
+minio-data/
+
+# Checkpoints de Spark/Databricks
+*.checkpoint
+*.meta
+*.snap
+*.part*
