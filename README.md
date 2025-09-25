@@ -54,7 +54,7 @@ Asegúrate de tener un `docker-compose.yml` configurado con:
 * (Opcional) PostgreSQL para metadatos de Airflow
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ### 4. Configurar variables de entorno
