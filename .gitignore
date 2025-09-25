@@ -20,3 +20,9 @@ minio-data/
 *.meta
 *.snap
 *.part*
+
+# Ignorar checkpoints de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Ignorar la carpeta scripts
+scripts/
