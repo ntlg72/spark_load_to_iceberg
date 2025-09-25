@@ -1,9 +1,7 @@
 # Configuración común para Spark
 x-spark-common: &spark-common
-  image: bitnami/spark:latest
+  image: bitnami/spark:3.5.1
   user: root
-  tmpfs:
-    - /opt/bitnami/spark/tmp
   volumes:
     - ./jobs:/opt/bitnami/spark/jobs
   networks:
