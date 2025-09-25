@@ -1,6 +1,4 @@
-Aquí tienes tu `README.md` completo y actualizado, incluyendo la instrucción para subir el archivo de ejemplo a Bronze antes de ejecutar el DAG:
 
-````markdown
 # Proyecto ETL con Airflow, Spark, MinIO, Iceberg y Nessie
 
 Este repositorio contiene un pipeline ETL que utiliza **Airflow**, **Apache Spark**, **MinIO**, **Iceberg** y **Nessie** para procesar datos desde un bucket de Bronze hacia Gold con control de versiones y catalogación.
@@ -112,9 +110,3 @@ scripts/
 
 
 
-```
-
-Si quieres, puedo hacer **una versión resumida y visual**, con diagramas del flujo ETL y las conexiones entre MinIO, Iceberg y Nessie, que suele ser más amigable para un README de presentación.  
-
-¿Quieres que haga esa versión visual?
-```
