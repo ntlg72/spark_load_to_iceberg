@@ -163,6 +163,25 @@ services:
     container_name: dremio_data_stack_FHBD
     environment:
       - DREMIO_JAVA_SERVER_EXTRA_OPTS=-Dpaths.dist=file:///opt/dremio/data/dist
+    volumes:
+    - ./dremio/conf:/opt/dremio/conf  
+    - ./dremio/data:/opt/dremio/data   
+    networks:
+      - data-stack
+
+
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino_data_stack_FHBD
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./trino/catalog:/etc/trino/catalog
+      - ./trino/config:/etc/trino/config
+      - ./trino/auth:/etc/trino/auth
+    environment:
+      TRINO_USER: admin
+      TRINO_PASSWORD: password
     networks:
       - data-stack
 
