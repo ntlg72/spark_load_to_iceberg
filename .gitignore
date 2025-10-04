@@ -24,5 +24,3 @@ minio-data/
 # Ignorar checkpoints de Jupyter Notebook
 .ipynb_checkpoints/
 
-# Ignorar la carpeta scripts
-scripts/
